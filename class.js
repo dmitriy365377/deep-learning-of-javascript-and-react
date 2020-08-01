@@ -21,26 +21,155 @@
 //     };
 // }
 
-class Router2 {
-  constructor() {
-    this.dataOBJ = Object.create(null)
-  }
+// class Router2 {
+//   constructor() {
+//     this.dataOBJ = Object.create(null)
+//   }
 
-  bind(url,method,action) {
-    this.dataOBJ[url + method] = action  
-  }
+//   bind(url,method,action) {
+//     this.dataOBJ[url + method] = action  
+//   }
 
-  runRequest(url,method) {
-    const key = url + method
-     if(key in this.dataOBJ) {
-      return this.dataOBJ[key]()
-    }
-    return 'Error 404: Not Found';
-  }
+//   runRequest(url,method) {
+//     const key = url + method
+//      if(key in this.dataOBJ) {
+//       return this.dataOBJ[key]()
+//     }
+//     return 'Error 404: Not Found';
+//   }
 
+// }
+
+// const r = new Router2()
+
+// https://www.codewars.com/kata/55a144eff5124e546400005a/train/javascript
+
+// class Person {
+//   constructor(name,age) {
+//     this.name = name;
+//     this.age = age;
+//   }
+//   get info () {
+//     return `${this.name}s age is ${this.age}`
+//   }
+// }
+
+// function Person(name, age) {
+//   this.name = name;
+//   this.age = age;
+// }
+
+// Object.defineProperty(Person.prototype, 'info', {
+//   get: function () {
+//     return `${this.name}s age is ${this.age}`
+//   }
+// });
+
+//https://www.codewars.com/kata/55a14aa4817efe41c20000bc/train/javascript
+
+
+// class Animal {
+//   constructor(name) {
+//     this.name = name;
+//   }
+
+//   sayName() {
+//     console.log(this.name);
+//   }
+// }
+
+function Animal(x, y) {
+  this.name = x
+  this.age = y
 }
 
-const r = new Router2()
+Animal.prototype.sayName = function() {
+  console.log(this.name)
+}
+
+
+
+function Cat(...args) {
+  // tis = { __proto__: Cat.prototype }
+  Animal.apply(this, args);
+  // return this
+}
+
+//Animal.prototype.__proto__  === Object.prototype
+//Cat.prototype.__proto__  === Object.prototype
+Cat.prototype.__proto__ = Animal.prototype
+Cat.prototype.speak = function() {
+  return `${this.name} meows`
+}
+
+cat.sayName()
+// cat.__proto__.__proto__.sayName
+
+const cat = new Cat('Mr Whiskers');
+cat.sayName();
+
+// class Cat extends Animal {
+//   speak() {
+//     return `${this.name} meows`
+//   }
+// }
+
+// class Dog extends Animal {
+//   speak() {
+//     return `${this.name} спикс гав-гав`
+//   }
+// }
+
+
+// Person.prototype = {
+//   get:info() {
+    
+//   }
+// }
+
+// /'johns age is 34'
+
+// const john = new Person('john', 34)
+// console.log(john.info)
+
+// const mmmmm = new Person('mmmmm', 34)
+// console.log(mmmmm.info)
+
+// const whosOnline = (friends) => {
+//   return friends.reduce((total, obj) => ({
+//   if (obj['status'] === 'online' && obj['lastActivity'] <= 10) {
+//   total = { online: [obj['username']] }
+//   }
+//   if (obj['status'] === 'offline') {
+//   total = { offline: [obj['username']] }
+//   }
+//   if (obj['status'] === 'online' && obj['lastActivity'] > 10) {
+//   total = { away: [obj['username']] }
+//   }
+//   }), {})
+//   }
+
+//   // {
+//   //   online: ['David'],
+//   //   offline: ['Lucy'],
+//   //   away: ['Bob']
+//   // }
+// const friends = [{
+//   username: 'David',
+//   status: 'online',
+//   lastActivity: 10
+// }, {
+//   username: 'Lucy', 
+//   status: 'offline',
+//   lastActivity: 22
+// }, {
+//   username: 'Bob', 
+//   status: 'online',
+//   lastActivity: 104
+// }]
+
+
+// whosOnline(friends)
 
 // function Router() {
 //     this.dataOBJ = Object.create(null);
