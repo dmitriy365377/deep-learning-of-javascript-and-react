@@ -1,8 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import Pokemon from './Pockemon.js'
-
+import A from './a.js'
 // https://pokeapi.co/api/v2/pokemon?offset=0&limit=12
+
+
+// Если нового клиента не регистрируют через форму, то по закрытию окна виджета - запрашивать комментарий менеджера "Почему не зарегистрировали клиента на сайте?" и еще раз предлагать эту кнопку.
+
+
+
 
 const POKEMONS_PER_PAGE = 6;
 
@@ -34,6 +40,26 @@ class App extends React.Component {
     this.changeButton = this.changeButton.bind(this);
   }
 
+  componentDidMount() {
+    const { page } = this.state
+    fetchPokemons(page).then(data => {
+      this.setState({
+        pokemons: data
+      })
+    })
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { page } = this.state
+    if(this.state.page !== prevState.page){
+      fetchPokemons(page).then(data => {
+        this.setState({
+          pokemons: data
+        })
+      })
+    }
+  }
+
   handelChange(id) {
     this.setState(({ saveId }) => ({
       saveId: saveId.includes(id)
@@ -60,17 +86,18 @@ class App extends React.Component {
   render() {
     const {page,saveId,pokemons} = this.state
     console.log(this);
+    //   <div className="container">
+    //   <div className="title">Поймано покемонов</div>
+    //   <div className="page">{page}</div>
+    //   <div className="count">{`${saveId.length}/${pokemons.length}`}</div>
+    //   <div className="container-circle">
+    //     {pokemons.map((pock) => <Pokemon caught={saveId.includes(pock.id)} key={pock.id} name={pock.name} id={pock.id} handelChange={this.handelChange}/>)}
+    //   </div>
+    //   <button data-dir="prev" disabled={this.state.page === 1} onClick={this.changeButton}>Prev</button>
+    //   <button data-dir="next" onClick={this.changeButton}>Next</button>
+    //  </div>
     return (
-      <div className="container">
-      <div className="title">Поймано покемонов</div>
-      <div className="page">{page}</div>
-      <div className="count">{`${saveId.length}/${pokemons.length}`}</div>
-      <div className="container-circle">
-        {pokemons.map((pock) => <Pokemon caught={saveId.includes(pock.id)} key={pock.id} name={pock.name} id={pock.id} handelChange={this.handelChange}/>)}
-      </div>
-      <button data-dir="prev" onClick={this.changeButton}>Prev</button>
-      <button data-dir="next" onClick={this.changeButton}>Next</button>
-    </div>
+      <A/>
     )
   }
 }
