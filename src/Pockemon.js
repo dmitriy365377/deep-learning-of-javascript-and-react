@@ -1,4 +1,4 @@
-import React, { memo, Component } from 'react'
+import React, { memo } from 'react'
 import './App.css';
 
 function isEqual(obj1, obj2) {
@@ -6,6 +6,19 @@ function isEqual(obj1, obj2) {
         return obj1[key] === obj2[key];
     });
 }
+
+const Pokemon = memo(({name,id,handelChange,caught}) => {
+    console.log(name);
+    return (<div className={caught ? 'circle-red' : 'circle'}>
+        <div className='pokemon-name'>{name}</div>
+        <img className="pockemon-img" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="Logo" />
+        <button onClick={() => handelChange(id)} className='catch'>{caught ? 'Отпустить' : 'Поймать' }</button>
+    </div>
+    )
+})
+
+
+export default Pokemon;
 
 // a = {
 //     x: 1,
@@ -17,43 +30,32 @@ function isEqual(obj1, obj2) {
 //     y: 2,
 // }
 
-class Pockemon extends React.PureComponent {
+// class Pockemon extends React.PureComponent {
 
-    // shouldComponentUpdate(nextProps) {
-    //     nextProps.programs.map(({ id }) => id);
-    //     this.props.programs.map(({ id }) => id);
-    // }
+//     // shouldComponentUpdate(nextProps) {
+//     //     nextProps.programs.map(({ id }) => id);
+//     //     this.props.programs.map(({ id }) => id);
+//     // }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return !isEqual(this.props, nextProps) && !isEqual(this.state, nextState)
-    // }
+//     // shouldComponentUpdate(nextProps, nextState) {
+//     //     return !isEqual(this.props, nextProps) && !isEqual(this.state, nextState)
+//     // }
     
-    render() {
-        // this.forceUpdate();
-        const { caught, name, id, handelChange } = this.props
-        console.log(name);
-        return (
-            <div className={caught ? 'circle-red' : 'circle'}>
-                <div className='pokemon-name'>{name}</div>
-                <img className="pockemon-img" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="Logo" />
-                <button onClick={() => handelChange(id)} className='catch'>{caught ? 'Отпустить' : 'Поймать'}</button>
-            </div>
-        )
-    }
-}
-
-export default Pockemon;
-
-
-
-// const Pokemon = ({name,id,handelChange,caught}) => {
-//     console.log(name);
-//     return (<div className={caught ? 'circle-red' : 'circle'}>
-//         <div className='pokemon-name'>{name}</div>
-//         <img className="pockemon-img" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="Logo" />
-//         <button onClick={() => handelChange(id)} className='catch'>{caught ? 'Отпустить' : 'Поймать' }</button>
-//     </div>
-//     )
+//     render() {
+//         // this.forceUpdate();
+//         const { caught, name, id, handelChange } = this.props
+//         console.log(name);
+//         return (
+//             <div className={caught ? 'circle-red' : 'circle'}>
+//                 <div className='pokemon-name'>{name}</div>
+//                 <img className="pockemon-img" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt="Logo" />
+//                 <button onClick={() => handelChange(id)} className='catch'>{caught ? 'Отпустить' : 'Поймать'}</button>
+//             </div>
+//         )
+//     }
 // }
+
+
+
 
 
